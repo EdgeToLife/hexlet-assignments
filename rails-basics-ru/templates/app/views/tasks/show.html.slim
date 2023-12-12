@@ -1,0 +1,30 @@
+p style="color: green" = notice
+
+/ == render @task
+
+h1 = @task.name
+p
+  b> Description:
+  = @task.description
+p 
+  b> Status:
+  = @task.status
+p 
+  b> Creator:
+  = @task.creator
+p 
+  b> Performer:
+  = @task.performer
+p 
+  b> Completed:
+  = @task.completed
+p 
+  b> Created:
+  = @task.created_at
+
+div
+  => link_to "Edit this task", edit_task_path(@task)
+  '|
+  =< link_to "Back to tasks", tasks_path
+
+  = button_to "Destroy this task", @task, method: :delete
