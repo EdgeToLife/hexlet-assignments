@@ -1,0 +1,7 @@
+<h1>Tasks</h1>
+
+<% @tasks.each do |task| %>
+  <p><%= link_to task.name, task_path(task) %></p>
+<% end %>
+<hr>
+<%= button_tag 'Create Task', onclick: "window.location.href = '#{new_task_path}'" %>

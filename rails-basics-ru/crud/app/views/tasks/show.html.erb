@@ -1,0 +1,11 @@
+<h1><%= @task.name %></h1>
+<p><b>Description:</b> <%= @task.description %></p>
+<p><b>Status:</b> <%= @task.status %></p>
+<p><b>Creator:</b> <%= @task.creator %></p>
+<p><b>Performer</b> <%= @task.performer %></p>
+<p><b>Completed</b> <%= @task.completed %></p>
+<p><b>Created:</b> <%= @task.created_at %></p>
+
+<%= link_to "Back", tasks_path %>
+<%= link_to "Edit", edit_task_path %>
+<%= link_to "Delete", task_path(@task), data: { "turbo-method": :delete, "turbo-confirm": 'Are you sure?' } %>
