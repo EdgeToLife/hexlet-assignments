@@ -1,0 +1,15 @@
+div id="#{dom_id task}"
+  p
+    strong Name:
+    =< task.name
+  p
+    strong Description:
+    =< task.description
+
+  p
+    strong Status:
+    =< task.status.try(:name) || 'No status assigned'
+
+  p
+    strong User:
+    =< task.user.try(:name) || 'No user assigned'
