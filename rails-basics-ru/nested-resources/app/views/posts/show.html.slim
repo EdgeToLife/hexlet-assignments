@@ -1,0 +1,25 @@
+- content_for :title do
+  = @post.title
+p
+  = @post.body
+h4 Comments
+
+#comments
+
+table.table.table-striped.table-hover
+  tbody
+    - @post.comments.each do |comment|
+      tr
+        td.d-flex = render comment
+        td.d-flex
+          .me-4 = link_to 'Edit', edit_comment_path(comment)
+          .me-4 = link_to 'Destroy', comment_path(comment), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'link-danger'
+
+.d-flex
+  = link_to 'New comment', new_post_comment_path(@post), class: 'btn btn-primary'
+
+hr
+
+.d-flex
+  = link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-primary me-2'
+  = link_to 'Back', posts_path, class: 'btn btn-outline-primary'

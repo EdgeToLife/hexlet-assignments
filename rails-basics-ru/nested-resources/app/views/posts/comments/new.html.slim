@@ -1,0 +1,10 @@
+h1 New comment
+
+== render "form", comment: @comment, url: post_comments_path(@post)
+
+br
+
+/ div
+.d-flex
+  = link_to 'Back', post_path(@post), class: 'btn btn-outline-primary'
+  / = link_to "Back to comments", post_comments_path
