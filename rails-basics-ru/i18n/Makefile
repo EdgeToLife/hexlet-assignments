@@ -2,6 +2,7 @@ setup:
 	bin/setup
 	bin/rails db:seed
 	yarn
+	bundle install
 
 start:
 	bin/dev
