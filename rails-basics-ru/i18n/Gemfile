@@ -28,7 +28,7 @@ gem 'simple_form'
 gem 'slim-rails'
 
 # BEGIN
-gem 'rails-i18n', '~> 7.0', '>= 7.0.8'
+gem 'rails-i18n'
 # END
 
 group :development, :test do
