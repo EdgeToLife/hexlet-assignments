@@ -1,0 +1,40 @@
+= content_for :title do
+  = 'Posts'
+
+= link_to 'New Post', new_post_path, class: 'btn btn-primary my-2'
+
+.p-3.bg-light
+  / BEGIN
+  = search_form_for @search do |f|
+    .row.my-2
+      .col-5
+        / = f.label :title_cont, "Название"
+        = f.search_field :title_cont
+      .col-4
+        / = f.label :aasm_state_in, "Статус"
+        = f.select :aasm_state_in, Post.aasm.states.map(&:name), { include_blank: true }
+      .col-3
+        = f.submit 'Поиск', class: 'btn btn-primary me-2'
+        = link_to 'Сброс', url_for, class: 'btn btn-outline-primary'
+  / END
+
+table.table.table-striped.table-hover.mb-5
+  thead
+    tr
+      th{ scope = 'col' } #
+      th{ scope = 'col' } Title
+      th{ scope = 'col' } State
+      th
+
+  tbody
+    - @posts.each_with_index do |post, i|
+      tr
+        th{ scope = 'row' } = i + 1
+        td = post.title
+        td = post.aasm.current_state
+        td.d-flex
+          .me-4 = link_to 'Show', post
+          .me-4 = link_to 'Edit', edit_post_path(post)
+          = link_to 'Destroy', post, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'link-danger'
+
+= link_to 'New Post', new_post_path, class: 'btn btn-primary'
