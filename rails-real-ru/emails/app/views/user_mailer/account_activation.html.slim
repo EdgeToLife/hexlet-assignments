@@ -1,0 +1,8 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+  body
+    h1 Hello, #{@user.name}!
+    p Welcome to our test site. To complete registration follow the link below
+    a href=new_user_url(@user, confirmation_token: @user.confirmation_token) Complete registration
