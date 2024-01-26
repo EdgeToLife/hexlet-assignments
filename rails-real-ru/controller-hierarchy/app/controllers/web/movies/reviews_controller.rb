@@ -19,7 +19,7 @@ class Web::Movies::ReviewsController <  Web::Movies::ApplicationController
 
   def create
     @movie = resource_movie
-    @review = Review.build(permitted_review_params)
+    @review = Review.new(permitted_review_params)
     @review.movie_id = @movie.id
 
     if @review.save

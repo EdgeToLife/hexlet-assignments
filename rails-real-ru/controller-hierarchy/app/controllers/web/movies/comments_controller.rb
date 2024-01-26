@@ -15,7 +15,7 @@ class Web::Movies::CommentsController < Web::Movies::ApplicationController
 
   def create
     @movie = resource_movie
-    @comment = Comment.build(permitted_comment_params)
+    @comment = Comment.new(permitted_comment_params)
     @comment.movie_id = @movie.id
     if @comment.save
       redirect_to movie_comments_path, notice: t('success')
