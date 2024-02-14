@@ -40,7 +40,7 @@ end
 
 class Api::V1::NamesController < Web::ApplicationController
   def fetch
-    result = FetchNameInformationService.new.(name: params[:name])
+    result = FetchNameInformationService.new.call(name: params[:name])
   end
 end
 
@@ -62,25 +62,23 @@ class FetchNameInformationService
   end
 end
 
-
 # test/services/fetch_name_information_service_test.rb
 require 'test_helper'
-require_relative 'app/services/fetch_name_information_service.rb'
+require_relative 'app/services/fetch_name_information_service'
 
 # При каждом запуске тестов выполняется реальный запрос к API
 class FetchNameInformationServiceTest < ActiveSupport::TestCase
   test '#call' do
-    result = FetchNameInformationService.new.(name: params[:name])
+    result = FetchNameInformationService.new.call(name: params[:name])
 
     assert result['country'].is_a? Array
   end
 end
 
-
 # ./Gemfile
 group :test do
   # https://github.com/bblimke/webmock
-  gem "webmock"
+  gem 'webmock'
 end
 
 # ./test/test_helper.rb
@@ -88,8 +86,7 @@ require 'webmock/minitest'
 
 # test/services/fetch_name_information_service_test.rb
 require 'test_helper'
-require_relative 'app/services/fetch_name_information_service.rb'
-
+require_relative 'app/services/fetch_name_information_service'
 
 # app/services/fetch_name_information_service.rb
 # Сервис возвращает информацию об имени и верояность его использования в странах
@@ -118,7 +115,7 @@ class FetchNameInformationServiceTest < ActiveSupport::TestCase
   test '#call' do
     name = 'John'
     stub_request(:get, "#{FetchNameInformationService::FETCH_NAME_BASE_URL}?name=#{name}")
-    result = FetchNameInformationService.new.(name: name)
+    result = FetchNameInformationService.new.call(name: name)
 
     assert result[:country].is_a? String
     assert result[:possibility].is_a? String
@@ -140,7 +137,7 @@ class Api::V1::NamesControllerTest < ActionDispatch::IntegrationTest
 end
 
 # Webmock может подменять ответы от внешних сервисов.
-stub_request(:get, "www.example.com").
-  to_return({body: "abc"}, {body: "def"})
+stub_request(:get, 'www.example.com')
+  .to_return({ body: 'abc' }, { body: 'def' })
 Net::HTTP.get('www.example.com', '/')    # ===> "abc\n"
 Net::HTTP.get('www.example.com', '/')    # ===> "def\n"
