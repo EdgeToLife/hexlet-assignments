@@ -19,8 +19,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
           'Content-Type' => 'application/json',
           'User-Agent' => 'Octokit Ruby Gem 5.6.1'
         }
-      )
-      .to_return(status: 200, body: @fixture_data, headers: { 'Content-Type': 'application/json' })
+      ).to_return(status: 200, body: @fixture_data, headers: { 'Content-Type': 'application/json' })
 
     post repositories_url, params: repository_params
 
