@@ -32,7 +32,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def update_repos
     # BEGIN
-    @repositories = Repository.all.order(created_at: :desc)
+    @repositories = Repository.all.order(created_at: :asc)
     @repositories.each do |repo|
       RepositoryLoaderJob.perform_later(repo)
     end
